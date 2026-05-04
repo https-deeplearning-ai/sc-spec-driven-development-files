@@ -2,7 +2,7 @@
 
 ## Prompt 1
 
-Find the next phase on specs/roadmap.md and make a branch, ask me about the feature spec.
+Find the first phase on specs/roadmap.md and make a branch, ask me about the feature spec.
 Create:
  - A new directory YYYY-MM-DD-feature-name under specs for this feature work
  - In there:
