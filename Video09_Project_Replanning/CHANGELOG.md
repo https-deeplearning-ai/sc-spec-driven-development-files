@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## 2026-05-05
+- chore: update CHANGELOG.md via refined skill
 - chore: update CHANGELOG.md with recent commits
 - chore: update CHANGELOG.md
 - feat: implement responsive design, relocate tests, and add changelog-manager skill
