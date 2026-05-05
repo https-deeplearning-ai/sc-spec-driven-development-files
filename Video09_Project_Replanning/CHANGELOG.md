@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## 2026-05-05
+- chore: update CHANGELOG.md
 - feat: implement responsive design, relocate tests, and add changelog-manager skill
 - Add vitest and write a test for the index.tsx file
 
