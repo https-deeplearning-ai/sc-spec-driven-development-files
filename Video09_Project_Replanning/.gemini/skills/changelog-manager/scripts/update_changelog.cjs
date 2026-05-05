@@ -40,26 +40,24 @@ function updateChangelog() {
         if (!commitsByDate[date]) {
             commitsByDate[date] = [];
         }
-        // Avoid duplicate subjects on same date (simplistic)
+        // Avoid duplicate subjects on same date
         if (!commitsByDate[date].includes(subject)) {
             commitsByDate[date].push(subject);
         }
     });
 
-    if (!fs.existsSync(CHANGELOG_PATH)) {
-        console.log("CHANGELOG.md not found. Generating from git history...");
-        const content = formatChangelog(commitsByDate);
-        fs.writeFileSync(CHANGELOG_PATH, content);
-        console.log("✅ Created CHANGELOG.md");
-    } else {
+    const newContent = formatChangelog(commitsByDate);
+    
+    if (fs.existsSync(CHANGELOG_PATH)) {
         console.log("Updating existing CHANGELOG.md...");
-        // For simplicity in this skill, we'll re-generate it to ensure consistency with git
-        // A more advanced version would parse existing and append only new ones.
-        // But the requirement says "examine git commits and add bullets for each date".
-        const content = formatChangelog(commitsByDate);
-        fs.writeFileSync(CHANGELOG_PATH, content);
-        console.log("✅ Updated CHANGELOG.md");
+        // In a more advanced version, we'd preserve manual edits. 
+        // For this task, we'll keep it simple and deterministic from git.
+    } else {
+        console.log("Creating new CHANGELOG.md...");
     }
+
+    fs.writeFileSync(CHANGELOG_PATH, newContent);
+    console.log("✅ CHANGELOG.md updated successfully.");
 }
 
 updateChangelog();
