@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { app } from "./index";
+import { app } from "../src/index";
 
 test("GET / returns 200 OK and contains AgentClinic", async () => {
   const res = await app.request("/");
