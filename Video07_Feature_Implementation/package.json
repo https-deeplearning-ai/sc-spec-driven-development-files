@@ -4,10 +4,16 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsx watch src/index.tsx",
+    "typecheck": "tsc --noEmit"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@hono/node-server": "2.0.2",
+    "hono": "4.12.18"
+  },
   "devDependencies": {
+    "tsx": "^4.21.0",
     "typescript": "^5.5.3"
   },
   "private": true

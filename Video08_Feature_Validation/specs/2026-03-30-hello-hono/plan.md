@@ -25,12 +25,15 @@
 
 ## Group 5 — Layout Component
 
-12. Create `src/components/Layout.tsx` with a top-level shell (`<html>`, `<head>`, `<body>`); it imports `<Header>`, `<Main>`, and `<Footer>` from their own files
-13. Create `src/components/Header.tsx`, `src/components/Main.tsx`, and `src/components/Footer.tsx` as separate files, one component each
+12. Create `src/components/Layout.tsx` with a top-level HTML shell (`<html>`, `<head>`, `<body>`); it imports `<Header>` and `<Footer>` from their own files and wraps `{children}` with `<Main>`
+13. Create each sub-component in its own file:
+    - `src/components/Header.tsx` — site-wide header with a home link
+    - `src/components/Main.tsx` — semantic `<main>` wrapper that accepts `children`
+    - `src/components/Footer.tsx` — site-wide footer with copyright line
 14. `<head>` links to `/static/style.css`
-15. Create `static/style.css` with minimal base styles
+15. Create `static/style.css` with minimal base styles (reset, typography, header/main/footer spacing)
 16. Serve the `static/` directory via `@hono/node-server/serve-static` in `src/index.tsx`
-17. Update `src/pages/Home.tsx` to use `<Layout>` and place page content inside `<Main>`
+17. Update `src/pages/Home.tsx` to wrap content in `<Layout>` only — Layout's internal `<Main>` handles the semantic wrapper
 
 ## Group 6 — Verify
 
