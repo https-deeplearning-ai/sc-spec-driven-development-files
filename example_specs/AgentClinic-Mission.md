@@ -37,13 +37,13 @@ The medical metaphor is deliberate and load-bearing. "Hallucination" is already 
 ┌──────────────┐                    ┌──────────────┐                    ┌──────────────┐                    ┌──────────────┐
 │   TRIAGE     │ ──────────────────→│  DIAGNOSIS   │ ──────────────────→│  TREATMENT   │ ──────────────────→│  FOLLOW-UP   │
 │              │                    │              │                    │              │                    │              │
-│ Agent submits│  severity +        │ Match against│  ailment(s)       │ Select best  │  prescription     │ Agent returns│
-│ symptoms in  │  routing           │ ailment      │  identified       │ treatment per│  returned to      │ with outcome │
-│ natural lang │  assigned          │ catalog +    │                    │ ailment, adj │  caller           │ report       │
+│ Agent submits│  severity +        │ Match against│  ailment(s)        │ Select best  │  prescription      │ Agent returns│
+│ symptoms in  │  routing           │ ailment      │  identified        │ treatment per│  returned to       │ with outcome │
+│ natural lang │  assigned          │ catalog +    │                    │ ailment, adj │  caller            │ report       │
 │              │                    │ history      │                    │ for history  │                    │              │
 └──────────────┘                    └──────────────┘                    └──────────────┘                    └──────┬───────┘
-                                                                                                                  │
-                                          ┌───────────────────────────────────────────────────────────────────────┘
+                                                                                                                   │
+                                          ┌────────────────────────────────────────────────────────────────────────┘
                                           │
                                           ▼
                                    ┌──────────────┐
