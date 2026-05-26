@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: #202124;
+  background: #f8fafc;
+}
+
+.site-header,
+.site-main,
+.site-footer {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.site-header {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.site-name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.site-main {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.site-main h1 {
+  margin: 0 0 0.75rem;
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+
+.site-main p,
+.site-footer p {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.site-footer {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  color: #5f6368;
+}
+
+.site-footer p {
+  font-size: 0.95rem;
+}

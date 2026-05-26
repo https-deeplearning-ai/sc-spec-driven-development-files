@@ -13,6 +13,11 @@
 3. Home Page
    - Show the product name, `AgentClinic`.
    - Show a short friendly welcome message.
+   - Render the page with a main layout made from separate header, main, and footer component modules.
+   - Add a layout module that owns the shared HTML document shell and composes header, page content, and footer.
+   - Keep the server entry point focused on route wiring and choosing the page content.
+   - Move page styling into a standalone CSS file.
+   - Link the CSS file from the server-rendered HTML and serve it through the Hono app.
    - Keep styling minimal unless the existing project already has a simple pattern.
 
 4. Local Run Flow
