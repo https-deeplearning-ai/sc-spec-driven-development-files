@@ -26,20 +26,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/patients/page.js"
     ],
-    "/dashboard/ailments/page": [
+    "/api/patients/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/ailments/page.js"
-    ],
-    "/dashboard/visits/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/visits/page.js"
-    ],
-    "/dashboard/analytics/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/analytics/page.js"
+      "static/chunks/app/api/patients/route.js"
     ]
   }
 }
