@@ -9,7 +9,7 @@ Phases are intentionally small — each one is a shippable slice of work, indepe
 - Single `/` route returning "AgentClinic is open for business"
 - Confirm TypeScript types work end-to-end
 
-## Phase 2 — Base Layout
+## Phase 2 — Base Layout ✅
 - Server-side JSX layout component (header, nav, main, footer)
 - Basic CSS (custom properties, reset, typography)
 - All routes render inside the shared layout

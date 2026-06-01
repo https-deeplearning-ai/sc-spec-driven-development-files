@@ -12,12 +12,13 @@ Phases are intentionally small — each one is a shippable slice of work, indepe
 ## Phase 2 — Base Layout
 - Server-side JSX layout component (header, nav, main, footer)
 - Basic CSS (custom properties, reset, typography)
+- **Responsive mobile-first padding and container constraints**
 - All routes render inside the shared layout
 
 ## Phase 3 — Agent List
 - SQLite database + first migration (`agents` table)
 - Seed a handful of fictional agents
-- `/agents` page listing all agents
+- `/agents` page listing all agents (**responsive grid/list view**)
 
 ## Phase 4 — Agent Detail
 - `/agents/:id` page showing a single agent's profile
@@ -43,12 +44,9 @@ Phases are intentionally small — each one is a shippable slice of work, indepe
 - Simple table views for staff to manage records
 - Mary's dashboard is now real
 
-## Phase 9 — Polish & Accessibility
-- Responsive layout for Steve's modern-browser requirement
+## Phase 9 — Polish & Hardening
 - Semantic HTML audit
 - Keyboard navigation and focus styles
-
-## Phase 10 — Hardening
 - Error pages (404, 500)
 - Input sanitization on all forms
 - Basic logging middleware

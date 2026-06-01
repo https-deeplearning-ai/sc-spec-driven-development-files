@@ -11,8 +11,14 @@ body {
 }
 
 header {
-  padding: 1rem 2rem;
+  padding: 1rem 1.25rem;
   border-bottom: 1px solid #e5e5e5;
+}
+
+@media (min-width: 48rem) {
+  header {
+    padding: 1rem 2rem;
+  }
 }
 
 header a {
@@ -22,14 +28,26 @@ header a {
 }
 
 main {
-  padding: 2rem;
+  padding: 1.5rem 1.25rem;
   max-width: 60rem;
   margin-inline: auto;
 }
 
+@media (min-width: 48rem) {
+  main {
+    padding: 2rem;
+  }
+}
+
 footer {
-  padding: 1rem 2rem;
+  padding: 1rem 1.25rem;
   border-top: 1px solid #e5e5e5;
   font-size: 0.875rem;
   color: #666;
+}
+
+@media (min-width: 48rem) {
+  footer {
+    padding: 1rem 2rem;
+  }
 }

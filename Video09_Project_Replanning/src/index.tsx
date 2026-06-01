@@ -3,7 +3,7 @@ import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Home } from "./pages/Home";
 
-const app = new Hono();
+export const app = new Hono();
 
 app.use("/static/*", serveStatic({ root: "./" }));
 
