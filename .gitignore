@@ -3,3 +3,24 @@
 DeepLearning SDD Course - Lesson Scripts*.md
 scripts.md
 agentclinic copy/
+
+# Build artifacts
+**/.next/
+**/node_modules/
+**/out/
+**/data/
+**/*.db
+**/*.db-wal
+**/*.db-shm
+
+# Environment
+**/.env
+**/.env.local
+**/.env.*.local
+
+# Logs
+**/npm-debug.log*
+
+# TypeScript
+**/*.tsbuildinfo
+**/next-env.d.ts
