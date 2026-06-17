@@ -1,12 +1,21 @@
 export function Header() {
   return (
-    <>
-      <header>
-        <span class="site-name">AgentClinic</span>
-      </header>
+    <header>
       <nav>
-        <a href="/">Home</a>
+        <ul>
+          <li>
+            <strong>AgentClinic</strong>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/agents">Agents</a>
+          </li>
+        </ul>
       </nav>
-    </>
+    </header>
   )
 }
