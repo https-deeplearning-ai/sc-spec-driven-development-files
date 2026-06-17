@@ -14,11 +14,14 @@
   - `body` reset: `margin: 0`, `font-family: var(--font-sans)`, `background`, `color`, `line-height`
   - Baseline styles for `header`, `nav`, `main`, `footer` using the custom properties
 
-## 3. Build the Layout component
+## 3. Build the Layout component and its three subcomponents
 
+- Create `src/components/Header.tsx` — renders `<header>` (site name) and `<nav>` (Home link)
+- Create `src/components/Footer.tsx` — renders `<footer>` with tagline
+- Create `src/components/Main.tsx` — accepts `{ children: any }` and renders `<main>{children}</main>`
 - Create `src/components/Layout.tsx` — accepts `{ title: string; children: any }` props
-- Renders full HTML document: `<html>`, `<head>` (charset, viewport, title, stylesheet link), `<body>`
-- Body structure: `<header>` (site name), `<nav>` (Home link), `<main>{children}</main>`, `<footer>` (tagline)
+  - Renders full HTML document: `<html>`, `<head>` (charset, viewport, title, `<link rel="stylesheet" href="/style.css" />`), `<body>`
+  - Body composes `<Header />`, `<Main>{children}</Main>`, `<Footer />` as imported subcomponents
 
 ## 4. Wire Home page into Layout
 

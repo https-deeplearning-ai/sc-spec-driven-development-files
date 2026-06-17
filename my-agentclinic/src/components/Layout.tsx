@@ -1,3 +1,7 @@
+import { Header } from './Header'
+import { Main } from './Main'
+import { Footer } from './Footer'
+
 type LayoutProps = {
   title: string
   children: any
@@ -13,16 +17,9 @@ export function Layout({ title, children }: LayoutProps) {
         <link rel="stylesheet" href="/style.css" />
       </head>
       <body>
-        <header>
-          <span class="site-name">AgentClinic</span>
-        </header>
-        <nav>
-          <a href="/">Home</a>
-        </nav>
-        <main>{children}</main>
-        <footer>
-          A full-service wellness platform for AI agents.
-        </footer>
+        <Header />
+        <Main>{children}</Main>
+        <Footer />
       </body>
     </html>
   )
