@@ -2,6 +2,8 @@
 
 Phases are intentionally small — each one is a shippable slice of work, independently reviewable and testable.
 
+Each phase ships with a passing Vitest suite (`npm test`). Tests live alongside source in `src/**/*.test.{ts,tsx}` and are part of every phase's Definition of Done.
+
 ---
 
 ## Phase 1 — Hello Hono ✅

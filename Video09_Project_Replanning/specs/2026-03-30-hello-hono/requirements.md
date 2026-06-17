@@ -7,7 +7,6 @@ Install and configure Hono with a `tsx` dev server. Expose a single `/` route th
 ## Out of Scope
 
 - No shared layout or navigation (Phase 2)
-- No test framework setup (Vitest deferred to a later phase)
 - No database or additional routes
 - No CI/CD pipeline
 

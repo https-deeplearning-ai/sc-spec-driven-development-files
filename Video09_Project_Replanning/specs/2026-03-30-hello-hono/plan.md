@@ -37,3 +37,4 @@
 18. Run `npm run typecheck` — must exit 0 with no errors
 19. Run `npm run dev` and confirm `curl localhost:3000` returns HTML containing the heading
 20. Confirm `curl localhost:3000/static/style.css` returns the CSS file
+21. Run `npm test` — all Vitest tests must pass

@@ -39,8 +39,18 @@ HTTP status must be `200 OK`. Response body must be HTML and must contain:
 
 `tsconfig.json` must contain `"strict": true`.
 
+### 6. Tests pass
+
+```
+npm test
+```
+
+Must exit with code 0. The Vitest suite for this phase (`src/app.test.tsx`) must contain at minimum:
+
+- A test that `GET /` returns HTTP 200
+- A test that the response body contains `AgentClinic` and an `<h1>` element
+
 ## Not Required
 
-- No automated tests needed for this phase
 - No CI pipeline required
 - Browser rendering not checked (curl is sufficient)
