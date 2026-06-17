@@ -1,6 +1,8 @@
 # Changelog
 
 ## 2026-06-17
+- Combine phases 2-5 into single phase 2 in roadmap
+- Add root-level /changelog skill and initial CHANGELOG.md
 - Merge Replanning-Branch into main
 - Add /changelog skill and initial CHANGELOG.md
 - Require responsive design across specs and CSS
