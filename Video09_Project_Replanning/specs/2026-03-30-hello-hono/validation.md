@@ -39,7 +39,19 @@ HTTP status must be `200 OK`. Response body must be HTML and must contain:
 
 `tsconfig.json` must contain `"strict": true`.
 
-### 6. Tests pass
+### 6. Responsive layout
+
+The viewport meta tag must be present in the rendered HTML:
+
+```
+curl -s http://localhost:3000 | grep 'viewport'
+```
+
+Must return a line containing `width=device-width`.
+
+CSS gutters must use `clamp()` so spacing is fluid. Verify `static/style.css` contains at least one `clamp(` call.
+
+### 7. Tests pass
 
 ```
 npm test

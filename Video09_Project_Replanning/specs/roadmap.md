@@ -13,7 +13,7 @@ Each phase ships with a passing Vitest suite (`npm test`). Tests live alongside 
 
 ## Phase 2 — Base Layout
 - Server-side JSX layout component (header, nav, main, footer)
-- Basic CSS (custom properties, reset, typography)
+- Responsive CSS baseline: fluid gutters via `clamp()`, `max-width` cap on content, viewport meta tag
 - All routes render inside the shared layout
 
 ## Phase 3 — Agent List
@@ -46,7 +46,7 @@ Each phase ships with a passing Vitest suite (`npm test`). Tests live alongside 
 - Mary's dashboard is now real
 
 ## Phase 9 — Polish & Accessibility
-- Responsive layout for Steve's modern-browser requirement
+- Enhanced responsive layout: test and refine across device sizes, fix any edge cases
 - Semantic HTML audit
 - Keyboard navigation and focus styles
 

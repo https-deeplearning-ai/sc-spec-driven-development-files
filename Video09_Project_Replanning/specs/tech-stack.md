@@ -10,7 +10,7 @@ AgentClinic is a server-side TypeScript application. All rendering happens on th
 | Runtime | Node.js | Stable, well-supported, vast ecosystem |
 | Server framework | **Hono** | Lightweight, TypeScript-first, fast, excellent DX; routes and middleware feel natural |
 | Templating | Hono JSX (server-side) | JSX without React overhead; components are just functions |
-| CSS | Plain CSS + CSS custom properties | No build step required; Steve gets a modern, attractive result |
+| CSS | Plain CSS + CSS custom properties + `clamp()` | No build step required; fluid responsive layout without a framework |
 
 ## Recommended: Hono
 
@@ -37,6 +37,16 @@ AgentClinic is a server-side TypeScript application. All rendering happens on th
 - `tsx` for development (run TypeScript directly, no build step needed)
 - `tsc` for production builds
 - `prettier` for formatting
+
+## Responsive Design
+
+All pages must work well at any viewport width, from 320 px (small mobile) to wide desktop. The approach:
+
+- The viewport `<meta>` tag (`width=device-width, initial-scale=1`) is present on every page via the shared `<Layout>` component.
+- Spacing uses `clamp(min, fluid, max)` so gutters and padding shrink gracefully on narrow screens without discrete breakpoints.
+- The `<main>` content area is capped at `60rem` and centered with `margin-inline: auto`, keeping line lengths readable on wide screens.
+- Images and media use `max-width: 100%; height: auto` to prevent overflow.
+- No CSS framework or media-query library is needed at this scale.
 
 ## What We Are Not Using
 
