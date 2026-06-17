@@ -8,6 +8,7 @@ Update this tech-stack.md to capture that we want to use Vitest tests for valida
 
 Update existing specs and code to reflect these testing changes.
 
+
 ## Prompt 3
 
 Write a new test suite using the specified testing framework.

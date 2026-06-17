@@ -2,6 +2,8 @@
 
 Phases are intentionally small — each one is a shippable slice of work, independently reviewable and testable.
 
+Each phase ships with a passing Vitest suite (`npm test`). Tests live alongside source in `src/**/*.test.{ts,tsx}` and are part of every phase's Definition of Done.
+
 ---
 
 ## Phase 1 — Hello Hono ✅
@@ -11,7 +13,7 @@ Phases are intentionally small — each one is a shippable slice of work, indepe
 
 ## Phase 2 — Base Layout
 - Server-side JSX layout component (header, nav, main, footer)
-- Basic CSS (custom properties, reset, typography)
+- Responsive CSS baseline: fluid gutters via `clamp()`, `max-width` cap on content, viewport meta tag
 - All routes render inside the shared layout
 
 ## Phase 3 — Agent List
@@ -44,7 +46,7 @@ Phases are intentionally small — each one is a shippable slice of work, indepe
 - Mary's dashboard is now real
 
 ## Phase 9 — Polish & Accessibility
-- Responsive layout for Steve's modern-browser requirement
+- Enhanced responsive layout: test and refine across device sizes, fix any edge cases
 - Semantic HTML audit
 - Keyboard navigation and focus styles
 

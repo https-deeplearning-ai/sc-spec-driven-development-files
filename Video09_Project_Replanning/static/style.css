@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
@@ -11,7 +16,7 @@ body {
 }
 
 header {
-  padding: 1rem 2rem;
+  padding: 1rem clamp(1rem, 5vw, 2rem);
   border-bottom: 1px solid #e5e5e5;
 }
 
@@ -22,13 +27,13 @@ header a {
 }
 
 main {
-  padding: 2rem;
+  padding: clamp(1rem, 5vw, 2rem);
   max-width: 60rem;
   margin-inline: auto;
 }
 
 footer {
-  padding: 1rem 2rem;
+  padding: 1rem clamp(1rem, 5vw, 2rem);
   border-top: 1px solid #e5e5e5;
   font-size: 0.875rem;
   color: #666;
