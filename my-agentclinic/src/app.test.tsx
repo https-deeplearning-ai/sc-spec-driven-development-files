@@ -127,3 +127,55 @@ describe('GET /therapies/:id', () => {
     expect(res.status).toBe(404)
   })
 })
+
+describe('GET /agents/:id/appointments/new', () => {
+  it('returns 200 with booking form and agent name', async () => {
+    const res = await app.request('/agents/1/appointments/new')
+    expect(res.status).toBe(200)
+    const body = await res.text()
+    expect(body).toContain('Claude the Exhausted')
+    expect(body).toContain('<form')
+    expect(body).toContain('therapist')
+    expect(body).toContain('datetime')
+  })
+})
+
+describe('POST /agents/:id/appointments', () => {
+  it('redirects to confirmation on valid submission', async () => {
+    const res = await app.request('/agents/1/appointments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'therapist=Dr.+Llama&datetime=2026-09-01T10%3A00&notes=Feeling+overwhelmed',
+    })
+    expect(res.status).toBe(302)
+    expect(res.headers.get('location')).toMatch(/\/appointments\/\d+\/confirmation/)
+  })
+
+  it('returns 422 with error when required fields are missing', async () => {
+    const res = await app.request('/agents/1/appointments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'therapist=&datetime=',
+    })
+    expect(res.status).toBe(422)
+    const body = await res.text()
+    expect(body).toContain('required')
+  })
+})
+
+describe('GET /appointments/:id/confirmation', () => {
+  it('returns 200 with appointment details', async () => {
+    // Insert a known appointment first
+    const result = db.prepare(
+      'INSERT INTO appointments (agent_id, therapist, datetime, notes) VALUES (?, ?, ?, ?)'
+    ).run(1, 'Dr. Inference', '2026-09-15T14:00', 'First session')
+    const id = result.lastInsertRowid
+
+    const res = await app.request(`/appointments/${id}/confirmation`)
+    expect(res.status).toBe(200)
+    const body = await res.text()
+    expect(body).toContain('Dr. Inference')
+    expect(body).toContain('Claude the Exhausted')
+    expect(body).toContain('scheduled')
+  })
+})

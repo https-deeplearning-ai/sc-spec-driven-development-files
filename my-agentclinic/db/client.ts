@@ -21,3 +21,4 @@ db.exec(readFileSync(join(dir, 'migrations', '003_create_ailments.sql'), 'utf-8'
 db.exec(readFileSync(join(dir, 'migrations', '004_create_agent_ailments.sql'), 'utf-8'))
 db.exec(readFileSync(join(dir, 'migrations', '005_create_therapies.sql'), 'utf-8'))
 db.exec(readFileSync(join(dir, 'migrations', '006_create_ailment_therapies.sql'), 'utf-8'))
+db.exec(readFileSync(join(dir, 'migrations', '007_create_appointments.sql'), 'utf-8'))

@@ -26,6 +26,8 @@ export function AgentDetail({ agent, ailments }: { agent: Agent; ailments: Ailme
           ))}
         </ul>
       )}
+      <a href={`/agents/${agent.id}/appointments/new`}>Book Appointment</a>
+      {' '}
       <a href="/agents">← Back to Agents</a>
     </Layout>
   )
