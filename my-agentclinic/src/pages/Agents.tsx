@@ -5,6 +5,7 @@ export type Agent = {
   name: string
   model_type: string
   status: string
+  presenting_complaints: string | null
 }
 
 export function Agents({ agents }: { agents: Agent[] }) {
@@ -22,7 +23,7 @@ export function Agents({ agents }: { agents: Agent[] }) {
         <tbody>
           {agents.map((agent) => (
             <tr key={agent.id}>
-              <td>{agent.name}</td>
+              <td><a href={`/agents/${agent.id}`}>{agent.name}</a></td>
               <td>{agent.model_type}</td>
               <td>{agent.status}</td>
             </tr>
