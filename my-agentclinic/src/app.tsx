@@ -3,6 +3,8 @@ import { serveStatic } from '@hono/node-server/serve-static'
 import { Home } from './pages/Home'
 import { Agents, type Agent } from './pages/Agents'
 import { AgentDetail } from './pages/AgentDetail'
+import { Ailments, type Ailment } from './pages/Ailments'
+import { AilmentDetail } from './pages/AilmentDetail'
 import { db } from '../db/client'
 
 const app = new Hono()
@@ -20,7 +22,29 @@ app.get('/agents/:id', (c) => {
   const id = Number(c.req.param('id'))
   const agent = db.prepare('SELECT * FROM agents WHERE id = ?').get(id) as Agent | undefined
   if (!agent) return c.text('Agent not found', 404)
-  return c.html(<AgentDetail agent={agent} />)
+  const ailments = db.prepare(
+    `SELECT a.* FROM ailments a
+     JOIN agent_ailments aa ON aa.ailment_id = a.id
+     WHERE aa.agent_id = ?`
+  ).all(id) as Ailment[]
+  return c.html(<AgentDetail agent={agent} ailments={ailments} />)
+})
+
+app.get('/ailments', (c) => {
+  const ailments = db.prepare('SELECT * FROM ailments').all() as Ailment[]
+  return c.html(<Ailments ailments={ailments} />)
+})
+
+app.get('/ailments/:id', (c) => {
+  const id = Number(c.req.param('id'))
+  const ailment = db.prepare('SELECT * FROM ailments WHERE id = ?').get(id) as Ailment | undefined
+  if (!ailment) return c.text('Ailment not found', 404)
+  const agents = db.prepare(
+    `SELECT ag.* FROM agents ag
+     JOIN agent_ailments aa ON aa.agent_id = ag.id
+     WHERE aa.ailment_id = ?`
+  ).all(id) as Agent[]
+  return c.html(<AilmentDetail ailment={ailment} agents={agents} />)
 })
 
 export default app

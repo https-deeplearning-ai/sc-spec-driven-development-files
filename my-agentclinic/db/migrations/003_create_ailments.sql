@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS ailments (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  name        TEXT NOT NULL,
+  description TEXT NOT NULL
+);

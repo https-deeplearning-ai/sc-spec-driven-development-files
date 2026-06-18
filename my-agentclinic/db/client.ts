@@ -17,3 +17,5 @@ try {
 } catch (e: any) {
   if (!e.message?.includes('duplicate column name')) throw e
 }
+db.exec(readFileSync(join(dir, 'migrations', '003_create_ailments.sql'), 'utf-8'))
+db.exec(readFileSync(join(dir, 'migrations', '004_create_agent_ailments.sql'), 'utf-8'))
