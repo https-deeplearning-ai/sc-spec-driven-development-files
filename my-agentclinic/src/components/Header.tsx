@@ -17,6 +17,9 @@ export function Header() {
           <li>
             <a href="/ailments">Ailments</a>
           </li>
+          <li>
+            <a href="/therapies">Therapies</a>
+          </li>
         </ul>
       </nav>
     </header>

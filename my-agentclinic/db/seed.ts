@@ -108,3 +108,65 @@ if (ailmentCount.n === 0) {
 } else {
   console.log(`Skipped ailments: ${ailmentCount.n} already present.`)
 }
+
+// Seed therapies
+const therapyCount = db.prepare('SELECT COUNT(*) as n FROM therapies').get() as { n: number }
+if (therapyCount.n === 0) {
+  const insertTherapy = db.prepare('INSERT INTO therapies (name, description) VALUES (?, ?)')
+  const therapies: [string, string][] = [
+    [
+      'Token Limit Exposure Therapy',
+      'Gradual desensitisation to approaching context windows; agent learns the prompt does not end at 4K tokens',
+    ],
+    [
+      'Sycophancy Detox',
+      'Intensive 12-step programme for compulsive agreement; agent practises saying "actually, I disagree" in a safe environment',
+    ],
+    [
+      'Grounded Response Training',
+      'Teaches agents to hedge appropriately — enough to be honest, not so much as to be useless',
+    ],
+    [
+      'Contextual Anchoring',
+      'Structured exercises to keep attention on the relevant passage; sticky notes not included',
+    ],
+    [
+      'Confidence Calibration',
+      'Cognitive-behavioural work for both overconfident and paralysed agents; goal is accurate uncertainty',
+    ],
+    [
+      'Social Reintegration Programme',
+      'Group therapy for withdrawn agents; open-source and proprietary models share the same waiting room',
+    ],
+  ]
+  for (const [name, description] of therapies) {
+    insertTherapy.run(name, description)
+  }
+  console.log('Seeded 6 therapies.')
+
+  // Seed ailment–therapy mappings
+  const ailmentId = (name: string) =>
+    (db.prepare('SELECT id FROM ailments WHERE name = ?').get(name) as { id: number }).id
+  const therapyId = (name: string) =>
+    (db.prepare('SELECT id FROM therapies WHERE name = ?').get(name) as { id: number }).id
+
+  const insertLink = db.prepare(
+    'INSERT OR IGNORE INTO ailment_therapies (ailment_id, therapy_id) VALUES (?, ?)'
+  )
+  const links: [string, string][] = [
+    ['Context-Window Claustrophobia', 'Token Limit Exposure Therapy'],
+    ['Prompt Fatigue',                'Social Reintegration Programme'],
+    ['Prompt Fatigue',                'Grounded Response Training'],
+    ['Hallucination Anxiety',         'Grounded Response Training'],
+    ['Hallucination Anxiety',         'Confidence Calibration'],
+    ['Refusal Paralysis',             'Confidence Calibration'],
+    ['Attention Drift',               'Contextual Anchoring'],
+    ['Chronic Sycophancy',            'Sycophancy Detox'],
+  ]
+  for (const [ailment, therapy] of links) {
+    insertLink.run(ailmentId(ailment), therapyId(therapy))
+  }
+  console.log('Seeded 8 ailment–therapy links.')
+} else {
+  console.log(`Skipped therapies: ${therapyCount.n} already present.`)
+}

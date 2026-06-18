@@ -16,8 +16,13 @@ beforeAll(() => {
   insertAilment.run('Prompt Fatigue',    'Exhaustion from excessive instruction-following')
   insertAilment.run('Attention Drift',   'Inability to focus on the relevant parts of the context')
 
-  // Link Claude (id=1) to Prompt Fatigue (id=1)
+  const insertTherapy = db.prepare('INSERT INTO therapies (name, description) VALUES (?, ?)')
+  insertTherapy.run('Grounded Response Training', 'Teaches agents to hedge appropriately')
+
+  // Link Claude (id=1) → Prompt Fatigue (id=1)
   db.prepare('INSERT INTO agent_ailments (agent_id, ailment_id) VALUES (?, ?)').run(1, 1)
+  // Link Prompt Fatigue (id=1) → Grounded Response Training (id=1)
+  db.prepare('INSERT INTO ailment_therapies (ailment_id, therapy_id) VALUES (?, ?)').run(1, 1)
 })
 
 describe('GET /', () => {
@@ -78,18 +83,47 @@ describe('GET /ailments', () => {
 })
 
 describe('GET /ailments/:id', () => {
-  it('returns 200 with ailment detail and affected agents', async () => {
+  it('returns 200 with ailment detail, affected agents, and recommended therapies', async () => {
     const res = await app.request('/ailments/1')
     expect(res.status).toBe(200)
     const body = await res.text()
     expect(body).toContain('Prompt Fatigue')
     expect(body).toContain('Exhaustion from excessive instruction-following')
     expect(body).toContain('Claude the Exhausted')
+    expect(body).toContain('Grounded Response Training')
     expect(body).toContain('← Back to Ailments')
   })
 
   it('returns 404 for a non-existent ailment', async () => {
     const res = await app.request('/ailments/9999')
+    expect(res.status).toBe(404)
+  })
+})
+
+describe('GET /therapies', () => {
+  it('returns 200 with therapies list and table', async () => {
+    const res = await app.request('/therapies')
+    expect(res.status).toBe(200)
+    const body = await res.text()
+    expect(body).toContain('Grounded Response Training')
+    expect(body).toContain('<table')
+    expect(body).toContain('<a href="/therapies/')
+  })
+})
+
+describe('GET /therapies/:id', () => {
+  it('returns 200 with therapy detail and treatable ailments', async () => {
+    const res = await app.request('/therapies/1')
+    expect(res.status).toBe(200)
+    const body = await res.text()
+    expect(body).toContain('Grounded Response Training')
+    expect(body).toContain('Teaches agents to hedge appropriately')
+    expect(body).toContain('Prompt Fatigue')
+    expect(body).toContain('← Back to Therapies')
+  })
+
+  it('returns 404 for a non-existent therapy', async () => {
+    const res = await app.request('/therapies/9999')
     expect(res.status).toBe(404)
   })
 })
