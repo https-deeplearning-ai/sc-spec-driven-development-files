@@ -7,11 +7,13 @@ Install and configure Hono with a `tsx` dev server. Expose a single `/` route th
 ## Out of Scope
 
 - No shared layout or navigation (Phase 2)
-- No test framework setup (Vitest deferred to a later phase)
 - No database or additional routes
 - No CI/CD pipeline
 
 ## Decisions
+
+### Responsive design from day one
+All pages must be usable on screens from 320 px wide upward. The shared `<Layout>` component must include the viewport `<meta>` tag. CSS must use fluid spacing (`clamp()`) rather than fixed pixel/rem values so that gutters shrink gracefully on narrow viewports without requiring discrete breakpoints. No CSS framework is needed.
 
 ### Pin Hono version
 Record the exact Hono version in `package.json` with no range prefix (e.g., `"hono": "4.x.y"`). Future phases must not silently upgrade without deliberate review.

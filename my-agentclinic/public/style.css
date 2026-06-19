@@ -1,0 +1,119 @@
+:root {
+  --color-bg: #fafaf8;
+  --color-text: #1a1a1a;
+  --color-accent: #2563eb;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-header-bg: #1e293b;
+  --color-header-text: #f8fafc;
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
+
+  --max-width: 56rem;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Header */
+
+header {
+  background: var(--color-header-bg);
+  color: var(--color-header-text);
+  padding: var(--spacing-md) var(--spacing-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+header .site-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-header-text);
+}
+
+/* Nav */
+
+nav {
+  background: var(--color-header-bg);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: var(--spacing-sm) var(--spacing-xl);
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+nav a {
+  color: rgba(248, 250, 252, 0.75);
+  font-size: 0.9rem;
+  transition: color 0.15s;
+}
+
+nav a:hover {
+  color: var(--color-header-text);
+  text-decoration: none;
+}
+
+/* Main */
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-2xl) var(--spacing-xl);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 var(--spacing-md);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  margin: var(--spacing-xl) 0 var(--spacing-sm);
+}
+
+p {
+  margin: 0 0 var(--spacing-md);
+  color: var(--color-muted);
+}
+
+/* Footer */
+
+footer {
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}

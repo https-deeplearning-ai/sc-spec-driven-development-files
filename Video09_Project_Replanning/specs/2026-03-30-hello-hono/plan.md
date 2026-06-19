@@ -28,7 +28,7 @@
 12. Create `src/components/Layout.tsx` with a top-level shell (`<html>`, `<head>`, `<body>`); it imports `<Header>`, `<Main>`, and `<Footer>` from their own files
 13. Create `src/components/Header.tsx`, `src/components/Main.tsx`, and `src/components/Footer.tsx` as separate files, one component each
 14. `<head>` links to `/static/style.css`
-15. Create `static/style.css` with minimal base styles
+15. Create `static/style.css` with responsive base styles: `clamp()` for fluid gutters on `header`, `main`, and `footer`; `max-width` cap on `main`; `img { max-width: 100% }` guard
 16. Serve the `static/` directory via `@hono/node-server/serve-static` in `src/index.tsx`
 17. Update `src/pages/Home.tsx` to use `<Layout>` and place page content inside `<Main>`
 
@@ -37,3 +37,4 @@
 18. Run `npm run typecheck` — must exit 0 with no errors
 19. Run `npm run dev` and confirm `curl localhost:3000` returns HTML containing the heading
 20. Confirm `curl localhost:3000/static/style.css` returns the CSS file
+21. Run `npm test` — all Vitest tests must pass
