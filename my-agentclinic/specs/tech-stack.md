@@ -19,7 +19,11 @@ AgentClinic is a server-side TypeScript application. The browser receives plain 
 
 ## Testing
 
-- **Vitest** — fast, TypeScript-native
+- **Vitest** — fast, TypeScript-native test runner
+- **supertest** — HTTP integration tests against the Express app without starting a real server
+- Each phase's validation criteria are encoded as Vitest tests under `src/__tests__/`
+- Run with `npm test` (single pass) or `npm run test:watch` (interactive watch mode)
+- CI gate: all tests must pass before a branch is merged
 
 ## Tooling
 
