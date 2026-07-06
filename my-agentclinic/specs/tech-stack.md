@@ -10,7 +10,7 @@ AgentClinic is a server-side TypeScript application. The browser receives plain 
 | Runtime | Node.js | Stable, well-supported, vast ecosystem |
 | Server framework | **Express** | Widely known, large ecosystem, mature middleware |
 | Templating | Server-side HTML (via Express) | No client-side framework overhead |
-| CSS | Plain CSS + CSS custom properties | No build step required; keeps the stack simple |
+| CSS | Plain CSS + CSS custom properties + media queries | No build step required; mobile-first responsive layout; keeps the stack simple |
 
 ## Data
 

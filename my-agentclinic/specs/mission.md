@@ -21,8 +21,8 @@ AgentClinic connects agents with qualified therapists, matches ailments to evide
 
 - **Mary (Engineering)** — wants a reliable site built on a popular TypeScript stack, giving agents and staff a dashboard for easy access.
 - **Susan (Product)** — has a set of features covering agents, their ailments, therapies, and appointment booking.
-- **Steve (Marketing)** — wants an attractive site that works well in a modern browser.
+- **Steve (Marketing)** — wants an attractive site that is fully responsive and works well across screen sizes in a modern browser.
 
 ## What Success Looks Like
 
-Agents can register, describe their ailments, be matched with appropriate therapies, and book appointments. Staff can manage the full operation from a dashboard. The site is attractive, reliable, and TypeScript all the way through.
+Agents can register, describe their ailments, be matched with appropriate therapies, and book appointments. Staff can manage the full operation from a dashboard. The site is attractive, responsive across screen sizes, reliable, and TypeScript all the way through.

@@ -44,7 +44,7 @@ Phases are intentionally small — each one is a shippable slice, independently 
 - Mary's dashboard is now real
 
 ## Phase 9 — Polish & Accessibility
-- Responsive layout (Steve's modern-browser requirement)
+- Responsive layout (Steve's modern-browser requirement) — **mobile-first breakpoints are applied from Phase 2 onward; this phase audits and completes coverage**
 - Semantic HTML audit
 - Keyboard navigation and focus styles
 

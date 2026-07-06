@@ -20,7 +20,8 @@ This is the smallest possible slice of a working web server — nothing beyond t
 
 - **Mission alignment:** AgentClinic is a server-side TypeScript application; Express is the chosen framework (see `specs/tech-stack.md`).
 - **Stakeholder:** Mary wants a reliable site on a popular TypeScript stack — this phase lays that foundation.
-- **Stack constraints:** No React, no ORM, no Docker. Plain Node.js + Express + TypeScript only.
+- **Stakeholder:** Steve requires the UI to be responsive across screen sizes; mobile-first CSS is applied from the base layout onward.
+- **Stack constraints:** No React, no ORM, no Docker. Plain Node.js + Express + TypeScript only. CSS uses custom properties and media queries — no framework.
 
 ## Out of Scope
 

@@ -6,8 +6,10 @@
   --color-muted: #64748b;
   --color-border: #e2e8f0;
   --font-sans: system-ui, -apple-system, sans-serif;
+  --space-sm: 0.75rem;
   --space-md: 1rem;
   --space-lg: 2rem;
+  --content-max-width: 960px;
 }
 
 *,
@@ -31,19 +33,18 @@ body {
 header {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  padding: var(--space-md) var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
 }
 
 header h1 {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: var(--color-primary);
 }
 
 /* Main */
 main {
   flex: 1;
-  padding: var(--space-lg);
-  max-width: 960px;
+  padding: var(--space-md);
   width: 100%;
   margin: 0 auto;
 }
@@ -52,8 +53,34 @@ main {
 footer {
   background-color: var(--color-surface);
   border-top: 1px solid var(--color-border);
-  padding: var(--space-md) var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
   text-align: center;
   font-size: 0.875rem;
   color: var(--color-muted);
+}
+
+/* Tablet and up (≥ 640px) */
+@media (min-width: 640px) {
+  header {
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  header h1 {
+    font-size: 1.25rem;
+  }
+
+  main {
+    padding: var(--space-lg);
+  }
+
+  footer {
+    padding: var(--space-md) var(--space-lg);
+  }
+}
+
+/* Desktop (≥ 960px) */
+@media (min-width: 960px) {
+  main {
+    max-width: var(--content-max-width);
+  }
 }
