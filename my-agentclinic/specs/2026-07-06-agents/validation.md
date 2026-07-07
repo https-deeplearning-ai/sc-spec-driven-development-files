@@ -1,4 +1,4 @@
-# Validation — Phase 3 Slice: Agents Listing
+# Validation — Phase 3: Agents And Ailments
 
 ## Merge Gate
 
@@ -25,16 +25,33 @@ Test expectations for `GET /agents`:
 - Returns HTTP 200.
 - Returns HTML response rendered through shared layout.
 - Includes at least one known seeded agent name.
+- Includes links to agent detail routes.
+
+Test expectations for `GET /agents/:id`:
+
+- Returns HTTP 200 for known IDs.
+- Renders model type, status, presenting complaints, and linked ailments.
+- Returns HTTP 404 with clear not-found messaging for unknown IDs.
+
+Test expectations for `GET /ailments`:
+
+- Returns HTTP 200.
+- Includes seeded ailment names and descriptions.
+- Includes a linked-agent count for each ailment.
+
+Layout expectations across Phase 3 routes:
+
 - Includes PicoCSS stylesheet reference in rendered HTML layout.
-- Handles empty dataset gracefully (if seed disabled/cleared) with a clear empty-state message.
+- Renders inside shared layout shell.
 
 ## 3. Data Setup Reliability
 
 Expected:
 
-- Migration creates `agents` table without manual DB edits.
+- Migration creates `agents`, `ailments`, and `agent_ailments` tables without manual DB edits.
 - Seed process is repeatable and does not create uncontrolled duplicates.
-- Local fresh setup can reach a working `/agents` route from scratch.
+- Seeded links between agents and ailments are present.
+- Local fresh setup can reach working `/agents`, `/agents/:id`, and `/ailments` routes from scratch.
 
 ## 4. Type Safety And Build Hygiene
 
@@ -50,19 +67,19 @@ Expected:
 
 ## 5. Manual Spot Check
 
-Run app and open `/agents` in a browser.
+Run app and open `/agents`, `/agents/1`, and `/ailments` in a browser.
 
 Expected:
 
 - Page renders inside existing shared layout.
 - PicoCSS baseline typography/spacing is visibly applied.
-- List content is readable on desktop and narrow/mobile widths.
+- List and detail content are readable on desktop and narrow/mobile widths.
 - No runtime errors in server output during route handling.
 
 ## Done Definition
 
 - [ ] All required automated tests pass.
-- [ ] `/agents` route contract is satisfied.
+- [ ] Phase 3 route contracts are satisfied (`/agents`, `/agents/:id`, `/ailments`).
 - [ ] Migration and seed flow are reliable.
 - [ ] TypeScript check passes.
 - [ ] Manual browser verification passes.

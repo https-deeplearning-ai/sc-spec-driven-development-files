@@ -5,18 +5,23 @@ import { layout } from '../components/layout'
 
 describe('header()', () => {
   it('returns a <header> element', () => {
-    expect(header()).toContain('<header>')
+    expect(header()).toContain('<header class="container">')
     expect(header()).toContain('</header>')
   })
 
   it('contains the site name', () => {
     expect(header()).toContain('AgentClinic')
   })
+
+  it('contains navigation links for phase 3 pages', () => {
+    expect(header()).toContain('href="/agents"')
+    expect(header()).toContain('href="/ailments"')
+  })
 })
 
 describe('footer()', () => {
   it('returns a <footer> element', () => {
-    expect(footer()).toContain('<footer>')
+    expect(footer()).toContain('<footer class="container">')
     expect(footer()).toContain('</footer>')
   })
 
@@ -35,7 +40,7 @@ describe('layout()', () => {
 
   it('injects the content into <main>', () => {
     const html = layout('<p>Hello</p>')
-    expect(html).toContain('<main>')
+    expect(html).toContain('<main class="container">')
     expect(html).toContain('<p>Hello</p>')
     expect(html).toContain('</main>')
   })
@@ -50,11 +55,12 @@ describe('layout()', () => {
 
   it('links the stylesheet', () => {
     expect(layout('')).toContain('href="/styles.css"')
+    expect(layout('')).toContain('@picocss/pico@2/css/pico.min.css')
   })
 
   it('includes header and footer', () => {
     const html = layout('')
-    expect(html).toContain('<header>')
-    expect(html).toContain('<footer>')
+    expect(html).toContain('<header class="container">')
+    expect(html).toContain('<footer class="container">')
   })
 })
