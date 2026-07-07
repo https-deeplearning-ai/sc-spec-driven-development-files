@@ -16,6 +16,8 @@ describe('header()', () => {
   it('contains navigation links for phase 3 pages', () => {
     expect(header()).toContain('href="/agents"')
     expect(header()).toContain('href="/ailments"')
+    expect(header()).toContain('href="/therapies"')
+    expect(header()).toContain('href="/dashboard"')
   })
 })
 

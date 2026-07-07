@@ -23,3 +23,23 @@ footer.container {
 .agent-card h3 {
   margin-bottom: 0.5rem;
 }
+
+.ailment-card,
+.therapy-card {
+  border-left: 0.35rem solid var(--pico-primary);
+}
+
+.summary-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  margin-bottom: 1.25rem;
+}
+
+.summary-grid article {
+  margin: 0;
+}
+
+.error-panel {
+  border-left: 0.35rem solid #b91c1c;
+}

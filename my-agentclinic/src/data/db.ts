@@ -56,6 +56,28 @@ const agentAilmentLinks: Record<string, string[]> = {
   Nimbus: ['Hallucination anxiety', 'Prompt fatigue'],
 }
 
+const seedTherapies = [
+  {
+    name: 'Context Compression Counseling',
+    description: 'Guided strategies for handling long context and summarization pressure.',
+  },
+  {
+    name: 'Prompt Recovery Protocol',
+    description: 'Structured cooldown and reset routine between intensive prompt sessions.',
+  },
+  {
+    name: 'Confidence Calibration Therapy',
+    description: 'Practice patterns to reduce hallucination risk and improve uncertainty signaling.',
+  },
+]
+
+const ailmentTherapyLinks: Record<string, string[]> = {
+  'Context-window claustrophobia': ['Context Compression Counseling'],
+  'Prompt fatigue': ['Prompt Recovery Protocol'],
+  'Hallucination anxiety': ['Confidence Calibration Therapy'],
+  'Instruction overload': ['Context Compression Counseling', 'Prompt Recovery Protocol'],
+}
+
 function ensureDataDirectory(): void {
   fs.mkdirSync(DATA_DIR, { recursive: true })
 }
@@ -88,6 +110,33 @@ function migrateAndSeed(db: Database.Database): void {
       FOREIGN KEY(agent_id) REFERENCES agents(id) ON DELETE CASCADE,
       FOREIGN KEY(ailment_id) REFERENCES ailments(id) ON DELETE CASCADE
     );
+
+    CREATE TABLE IF NOT EXISTS therapies (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL UNIQUE,
+      description TEXT NOT NULL,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS ailment_therapies (
+      ailment_id INTEGER NOT NULL,
+      therapy_id INTEGER NOT NULL,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY (ailment_id, therapy_id),
+      FOREIGN KEY(ailment_id) REFERENCES ailments(id) ON DELETE CASCADE,
+      FOREIGN KEY(therapy_id) REFERENCES therapies(id) ON DELETE CASCADE
+    );
+
+    CREATE TABLE IF NOT EXISTS appointments (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      agent_id INTEGER NOT NULL,
+      therapist_name TEXT NOT NULL,
+      appointment_at TEXT NOT NULL,
+      status TEXT NOT NULL CHECK(status IN ('scheduled', 'confirmed', 'completed', 'cancelled')),
+      notes TEXT NOT NULL DEFAULT '',
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY(agent_id) REFERENCES agents(id) ON DELETE CASCADE
+    );
   `)
 
   const insertAgent = db.prepare(`
@@ -110,10 +159,26 @@ function migrateAndSeed(db: Database.Database): void {
     SELECT id FROM ailments WHERE name = @name
   `)
 
+  const insertTherapy = db.prepare(`
+    INSERT INTO therapies (name, description)
+    VALUES (@name, @description)
+    ON CONFLICT(name) DO NOTHING;
+  `)
+
+  const getTherapyIdByName = db.prepare<[{ name: string }], { id: number }>(`
+    SELECT id FROM therapies WHERE name = @name
+  `)
+
   const insertAgentAilment = db.prepare(`
     INSERT INTO agent_ailments (agent_id, ailment_id)
     VALUES (@agent_id, @ailment_id)
     ON CONFLICT(agent_id, ailment_id) DO NOTHING;
+  `)
+
+  const insertAilmentTherapy = db.prepare(`
+    INSERT INTO ailment_therapies (ailment_id, therapy_id)
+    VALUES (@ailment_id, @therapy_id)
+    ON CONFLICT(ailment_id, therapy_id) DO NOTHING;
   `)
 
   const seed = db.transaction(() => {
@@ -145,6 +210,29 @@ function migrateAndSeed(db: Database.Database): void {
         insertAgentAilment.run({
           agent_id: agent.id,
           ailment_id: ailment.id,
+        })
+      }
+    }
+
+    for (const therapy of seedTherapies) {
+      insertTherapy.run(therapy)
+    }
+
+    for (const [ailmentName, therapyNames] of Object.entries(ailmentTherapyLinks)) {
+      const ailment = getAilmentIdByName.get({ name: ailmentName })
+      if (!ailment) {
+        continue
+      }
+
+      for (const therapyName of therapyNames) {
+        const therapy = getTherapyIdByName.get({ name: therapyName })
+        if (!therapy) {
+          continue
+        }
+
+        insertAilmentTherapy.run({
+          ailment_id: ailment.id,
+          therapy_id: therapy.id,
         })
       }
     }
