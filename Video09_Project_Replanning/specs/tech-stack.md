@@ -10,7 +10,7 @@ AgentClinic is a server-side TypeScript application. All rendering happens on th
 | Runtime | Node.js | Stable, well-supported, vast ecosystem |
 | Server framework | **Hono** | Lightweight, TypeScript-first, fast, excellent DX; routes and middleware feel natural |
 | Templating | Hono JSX (server-side) | JSX without React overhead; components are just functions |
-| CSS | Plain CSS + CSS custom properties | No build step required; Steve gets a modern, attractive result |
+| CSS | Plain CSS + CSS custom properties, mobile-first and fluid | No build step required; Steve gets a modern, attractive result on any screen size |
 
 ## Recommended: Hono
 
@@ -20,6 +20,16 @@ AgentClinic is a server-side TypeScript application. All rendering happens on th
 - Built-in JSX renderer for server-side HTML
 - Middleware model is simple and composable
 - Runs on Node, Deno, Bun, and edge runtimes without changes
+
+## Responsive Design
+
+Steve needs the site to work well on any modern browser, phone or desktop, so responsive layout is a baseline requirement from the first page built, not a later polish pass:
+
+- Every page's `<head>` includes `<meta name="viewport" content="width=device-width, initial-scale=1.0">` — without it, mobile browsers render at a zoomed-out desktop width and none of the CSS below matters
+- Spacing and layout use fluid units (`clamp()`, `%`, `rem`) rather than fixed pixel widths, so pages don't require a specific breakpoint to look correct
+- No horizontal scrolling at any viewport width, from a small phone (~320px) up through desktop
+- Media/breakpoint queries are added only when content genuinely needs to restructure (e.g. a nav that collapses), not as the default mechanism for "making it responsive"
+- No CSS framework (Bootstrap, Tailwind) — plain CSS is enough for this scope, and keeps the "no build step" property intact
 
 ## Data
 

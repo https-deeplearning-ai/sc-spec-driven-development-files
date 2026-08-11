@@ -28,7 +28,8 @@
 12. Create `src/components/Layout.tsx` with a top-level shell (`<html>`, `<head>`, `<body>`); it imports `<Header>`, `<Main>`, and `<Footer>` from their own files
 13. Create `src/components/Header.tsx`, `src/components/Main.tsx`, and `src/components/Footer.tsx` as separate files, one component each
 14. `<head>` links to `/static/style.css`
-15. Create `static/style.css` with minimal base styles
+14a. `<head>` includes `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
+15. Create `static/style.css` with minimal base styles, using fluid spacing (`clamp()`) instead of fixed pixel padding so the layout doesn't require a desktop-width breakpoint to look right
 16. Serve the `static/` directory via `@hono/node-server/serve-static` in `src/index.tsx`
 17. Update `src/pages/Home.tsx` to use `<Layout>` and place page content inside `<Main>`
 
@@ -37,6 +38,7 @@
 18. Run `npm run typecheck` — must exit 0 with no errors
 19. Run `npm run dev` and confirm `curl localhost:3000` returns HTML containing the heading
 20. Confirm `curl localhost:3000/static/style.css` returns the CSS file
+20a. In a real browser (or devtools device toolbar), resize from ~320px to desktop width and confirm no horizontal scrollbar appears and text stays readable
 
 ## Group 7 — Testing Setup (added retroactively)
 

@@ -11,7 +11,7 @@ Phases are intentionally small — each one is a shippable slice of work, indepe
 
 ## Phase 2 — Base Layout
 - Server-side JSX layout component (header, nav, main, footer)
-- Basic CSS (custom properties, reset, typography)
+- Basic CSS (custom properties, reset, typography), responsive and fluid from the start — see [tech-stack.md](./tech-stack.md#responsive-design)
 - All routes render inside the shared layout
 
 ## Phase 3 — Agent List
@@ -44,7 +44,7 @@ Phases are intentionally small — each one is a shippable slice of work, indepe
 - Mary's dashboard is now real
 
 ## Phase 9 — Polish & Accessibility
-- Responsive layout for Steve's modern-browser requirement
+- Responsive QA pass across all pages built so far (phones, tablets, desktop) — the fluid foundation is laid in Phase 2, this phase audits every page built since then against it
 - Semantic HTML audit
 - Keyboard navigation and focus styles
 
