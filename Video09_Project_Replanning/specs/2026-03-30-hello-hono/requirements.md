@@ -7,9 +7,10 @@ Install and configure Hono with a `tsx` dev server. Expose a single `/` route th
 ## Out of Scope
 
 - No shared layout or navigation (Phase 2)
-- No test framework setup (Vitest deferred to a later phase)
 - No database or additional routes
 - No CI/CD pipeline
+
+> **Update:** Vitest was originally deferred to a later phase, but the test framework has since been set up (see [tech-stack.md](../tech-stack.md)) and now applies retroactively to this phase — see the updated [plan](./plan.md) and [validation](./validation.md).
 
 ## Decisions
 

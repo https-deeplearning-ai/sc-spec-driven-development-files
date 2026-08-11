@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx watch src/index.tsx",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@hono/node-server": "1.19.12",
@@ -14,7 +16,8 @@
   },
   "devDependencies": {
     "tsx": "4.21.0",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "vitest": "^3.2.7"
   },
   "private": true
 }

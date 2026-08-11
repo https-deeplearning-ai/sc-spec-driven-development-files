@@ -39,8 +39,15 @@ HTTP status must be `200 OK`. Response body must be HTML and must contain:
 
 `tsconfig.json` must contain `"strict": true`.
 
+### 6. Test suite runs
+
+```
+npm test
+```
+
+Must exit with code 0. An empty suite (no `*.test.ts` files yet) is acceptable for this phase; the command must simply run cleanly.
+
 ## Not Required
 
-- No automated tests needed for this phase
 - No CI pipeline required
 - Browser rendering not checked (curl is sufficient)

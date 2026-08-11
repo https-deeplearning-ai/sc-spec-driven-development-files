@@ -37,3 +37,9 @@
 18. Run `npm run typecheck` — must exit 0 with no errors
 19. Run `npm run dev` and confirm `curl localhost:3000` returns HTML containing the heading
 20. Confirm `curl localhost:3000/static/style.css` returns the CSS file
+
+## Group 7 — Testing Setup (added retroactively)
+
+21. Install `vitest` as a dev dependency
+22. Add `"test": "vitest run"` and `"test:watch": "vitest"` to `package.json` scripts
+23. Run `npm test` — must exit 0 (no test files yet is fine; a future phase adds the first suite)
