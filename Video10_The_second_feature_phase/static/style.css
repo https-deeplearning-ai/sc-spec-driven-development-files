@@ -1,3 +1,11 @@
+/*
+ * AgentClinic-specific layer, loaded after pico.min.css.
+ * Pico supplies the reset, typography, and base element styling (including
+ * a bare-bones nav/header/footer look); everything here is either an
+ * AgentClinic-specific token or a rule Pico's classless-free build doesn't
+ * cover on its own (page-width constraint, nav layout, detail-page grid).
+ */
+
 :root {
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
@@ -5,61 +13,65 @@
   --space-lg: 1.5rem;
   --space-xl: 2rem;
   --max-width: 60rem;
-  --color-text: #1a1a1a;
-  --color-subtle: #666;
-  --color-border: #e5e5e5;
-  --font-size-sm: 0.875rem;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-  color: var(--color-text);
-  background: #fff;
-}
-
-/* Mobile-first: compact padding on small screens */
-header {
-  padding: var(--space-sm) var(--space-md);
-  border-bottom: 1px solid var(--color-border);
-}
-
-header a {
-  font-weight: 600;
-  text-decoration: none;
-  color: inherit;
-}
-
-main {
-  padding: var(--space-md);
+/* Pico's default (non-classless) build only constrains width inside
+   .container — we're using plain semantic HTML with no extra classes,
+   so recreate that constraint directly on the layout landmarks. */
+body > header,
+body > main,
+body > footer {
   width: 100%;
   max-width: var(--max-width);
   margin-inline: auto;
+  padding-inline: var(--space-md);
 }
 
-footer {
-  padding: var(--space-sm) var(--space-md);
-  border-top: 1px solid var(--color-border);
-  font-size: var(--font-size-sm);
-  color: var(--color-subtle);
+body > header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding-block: var(--space-sm);
+}
+
+body > header nav ul {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body > main {
+  padding-block: var(--space-md);
+}
+
+body > footer {
+  padding-block: var(--space-sm);
+}
+
+/* Agent detail page: label/value pairs for model type, status, etc. */
+main dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-xs) var(--space-md);
+}
+
+main dt {
+  font-weight: 600;
+}
+
+main dd {
+  margin: 0;
 }
 
 /* Tablet and up */
 @media (min-width: 640px) {
-  header {
-    padding: var(--space-md) var(--space-xl);
-  }
-
-  main {
-    padding: var(--space-lg) var(--space-xl);
-  }
-
-  footer {
-    padding: var(--space-md) var(--space-xl);
+  body > header,
+  body > main,
+  body > footer {
+    padding-inline: var(--space-xl);
   }
 }

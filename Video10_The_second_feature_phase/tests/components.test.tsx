@@ -19,6 +19,13 @@ describe("Header", () => {
     const html = Header({}).toString();
     expect(html).toContain("AgentClinic");
   });
+
+  it("has a nav linking to Home, Agents, and Ailments", () => {
+    const html = Header({}).toString();
+    expect(html).toContain("<nav");
+    expect(html).toContain('href="/agents"');
+    expect(html).toContain('href="/ailments"');
+  });
 });
 
 describe("Footer", () => {
