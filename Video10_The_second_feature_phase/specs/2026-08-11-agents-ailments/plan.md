@@ -38,10 +38,10 @@
 
 ## Group 6 — Styling (PicoCSS)
 
-22. Copy Pico's stylesheet from `node_modules/@picocss/pico/css/pico.min.css` into `static/pico.min.css` (vendored, not a CDN link); add a script or documented step to re-sync it on Pico version bumps
+22. Copy Pico's **classless** stylesheet from `node_modules/@picocss/pico/css/pico.classless.min.css` into `static/pico.min.css` (vendored, not a CDN link) — the classless build, not the default one, since it styles bare `body > header/main/footer` directly without requiring a `.container` class
 23. Update `src/components/Layout.tsx` `<head>` to link `/static/pico.min.css` **before** the existing `/static/style.css`, so AgentClinic's rules load after and can override Pico's variables
-24. Trim `static/style.css` down to AgentClinic-specific concerns now that Pico supplies reset/typography/base element styles: keep/adjust the existing CSS custom properties (mapping AgentClinic's palette onto Pico's `--pico-*` variables), and add only the rules Pico doesn't cover (nav active-link styling, list/detail page layout for agents/ailments)
-25. Verify the result stays mobile-first: Pico is mobile-first by default; confirm AgentClinic's `min-width` media queries in `static/style.css` still layer on cleanly at Pico's breakpoints
+24. Trim `static/style.css` down to AgentClinic-specific concerns now that Pico's classless build supplies reset/typography/base element styles and the mobile-first width constraint: actually override Pico's `--pico-*` variables (at minimum `--pico-primary*`, for the AgentClinic brand color, light + dark), and add only the rules the classless build doesn't cover (header's brand+nav flex layout, agent-detail `<dl>` grid)
+25. Verify the result stays mobile-first: Pico's classless build is mobile-first by default (base styles + `min-width` breakpoints at 576/768/1024/1280/1536px on `body > header/main/footer`); `static/style.css` doesn't need its own `min-width` query unless a rule specifically requires one
 
 ## Group 7 — Tests
 

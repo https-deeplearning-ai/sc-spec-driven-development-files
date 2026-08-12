@@ -40,9 +40,9 @@ AgentClinic is a server-side TypeScript application. All rendering happens on th
 
 ## CSS Approach
 
-**[PicoCSS](https://picocss.com)** provides the base layer: classless, semantic-HTML-first styling (sensible defaults for `<nav>`, `<article>`, form elements, etc.) without needing utility classes or a component library. It's installed via npm (`@picocss/pico`) and its CSS file is vendored into `static/` — no CDN dependency, no build step, the browser still receives flat stylesheets.
+**[PicoCSS](https://picocss.com)** provides the base layer, specifically its **classless build** (`pico.classless.min.css`): semantic-HTML-first styling — including the page-width/spacing constraint on `body > header/main/footer` and `min-width`-driven mobile-first breakpoints — applied directly to bare tags, with no `.container` wrapper or utility classes required. It's installed via npm (`@picocss/pico`) and vendored into `static/pico.min.css` — no CDN dependency, no build step, the browser still receives flat stylesheets. (The non-classless build was tried first and dropped: it needs a `.container` class for width constraints, which pushed AgentClinic into hand-reimplementing what the classless build already does for free.)
 
-AgentClinic-specific styling layers on top in `static/style.css`, loaded after Pico's stylesheet: CSS custom properties override Pico's own variables (spacing, color, sizing tokens) for the AgentClinic brand, plus any rules Pico doesn't cover. All of it — Pico's base and the AgentClinic layer — stays mobile-first: base styles target small screens, `min-width` media queries progressively enhance for larger viewports.
+AgentClinic-specific styling layers on top in `static/style.css`, loaded after Pico's stylesheet: CSS custom properties override Pico's own `--pico-*` variables (currently the `--pico-primary*` family, for AgentClinic's brand color) plus any rules the classless build doesn't cover, such as the header's brand+nav flex layout. Mobile-first responsiveness itself — base styles for small screens, `min-width` media queries enhancing larger viewports — is provided by Pico's classless build; `static/style.css` only needs its own `min-width` rules if an AgentClinic-specific rule requires one.
 
 ## What We Are Not Using
 

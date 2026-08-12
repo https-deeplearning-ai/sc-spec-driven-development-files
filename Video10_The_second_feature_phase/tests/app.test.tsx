@@ -29,4 +29,23 @@ describe("GET /", () => {
     const html = await res.text();
     expect(html).toContain('href="/static/style.css"');
   });
+
+  it("links Pico's stylesheet before the AgentClinic stylesheet", async () => {
+    const res = await app.request("/");
+    const html = await res.text();
+    expect(html).toContain('href="/static/pico.min.css"');
+    expect(html.indexOf("pico.min.css")).toBeLessThan(html.indexOf('href="/static/style.css"'));
+  });
+});
+
+describe("static assets", () => {
+  it("serves the vendored PicoCSS stylesheet", async () => {
+    const res = await app.request("/static/pico.min.css");
+    expect(res.status).toBe(200);
+  });
+
+  it("serves the AgentClinic stylesheet", async () => {
+    const res = await app.request("/static/style.css");
+    expect(res.status).toBe(200);
+  });
 });

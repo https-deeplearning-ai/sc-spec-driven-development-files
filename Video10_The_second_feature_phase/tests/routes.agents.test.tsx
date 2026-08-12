@@ -19,7 +19,7 @@ describe("GET /agents", () => {
 });
 
 describe("GET /agents/:id", () => {
-  it("returns 200 and the agent's profile for a valid id", async () => {
+  it("returns 200 and the agent's profile, rendered inside the shared layout, for a valid id", async () => {
     const [agent] = listAgents();
     const res = await app.request(`/agents/${agent.id}`);
     expect(res.status).toBe(200);
@@ -28,6 +28,7 @@ describe("GET /agents/:id", () => {
     expect(html).toContain(agent.name);
     expect(html).toContain(agent.model_type);
     expect(html).toContain(agent.status);
+    expect(html).toContain("<nav");
   });
 
   it("lists the agent's presenting complaints (linked ailments)", async () => {
@@ -40,10 +41,16 @@ describe("GET /agents/:id", () => {
     expect(html).toContain("Prompt Fatigue");
   });
 
-  it("returns 404 with a plain not-found message for an unknown id", async () => {
+  it("returns 404 with a plain, minimal not-found message for an unknown id", async () => {
     const res = await app.request("/agents/999999");
     expect(res.status).toBe(404);
-    expect(await res.text()).toContain("Agent not found");
+
+    const html = await res.text();
+    expect(html).toContain("Agent not found");
+    // Minimal markup only, per requirements.md — no styled Layout chrome.
+    expect(html).not.toContain("<nav");
+    expect(html).not.toContain("<header");
+    expect(html).not.toContain("pico.min.css");
   });
 
   it("returns 404 for a non-numeric id", async () => {

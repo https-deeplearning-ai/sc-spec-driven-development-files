@@ -2,23 +2,11 @@ import { Layout } from "../components/Layout";
 import type { Agent, Ailment } from "../types";
 
 type AgentDetailProps = {
-  agent: Agent | undefined;
+  agent: Agent;
   ailments?: Ailment[];
 };
 
 export function AgentDetail({ agent, ailments = [] }: AgentDetailProps) {
-  if (!agent) {
-    return (
-      <Layout>
-        <h1>Agent not found</h1>
-        <p>We couldn't find an agent with that id.</p>
-        <p>
-          <a href="/agents">Back to Agents</a>
-        </p>
-      </Layout>
-    );
-  }
-
   return (
     <Layout>
       <h1>{agent.name}</h1>

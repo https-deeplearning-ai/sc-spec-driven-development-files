@@ -46,10 +46,10 @@ Follow tech-stack.md exactly: plain, numbered SQL files under `migrations/` (no 
 ### Navigation
 The header `<nav>` for this phase links to: Home, Agents, Ailments. No placeholder links for pages that don't exist yet. It's a plain semantic `<nav><ul>...` so Pico's built-in nav styling applies with no extra classes.
 
-### CSS framework — PicoCSS
-This phase switches the project's CSS approach from hand-written plain CSS to **PicoCSS** (`specs/tech-stack.md` updated accordingly). Pico is installed via npm (`@picocss/pico`) and its stylesheet is vendored into `static/` at setup time — no CDN dependency, no build step. It's classless: semantic HTML (`<nav>`, `<article>`, `<table>`, form elements) gets sensible styling without utility classes.
+### CSS framework — PicoCSS (classless build)
+This phase switches the project's CSS approach from hand-written plain CSS to **PicoCSS** (`specs/tech-stack.md` updated accordingly), specifically its **classless build** (`pico.classless.min.css`, vendored as `static/pico.min.css`). The classless build was chosen over the default build because AgentClinic uses plain semantic HTML with no extra classes (no `.container` wrapper); the classless build styles bare `body > header/main/footer` directly, including the mobile-first width/spacing breakpoints, so AgentClinic doesn't need to hand-reimplement that constraint itself. Installed via npm (`@picocss/pico`), vendored into `static/` — no CDN dependency, no build step.
 
-`static/style.css` (from Phase 1) is **not** discarded — it's kept and layered *after* Pico's stylesheet in `<head>`, so it can override Pico's own CSS custom properties (spacing/color/sizing tokens) with AgentClinic-specific values, and hold any AgentClinic-specific rules Pico doesn't cover. Both layers stay mobile-first: base styles for small screens, `min-width` media queries for larger viewports — this was true of `static/style.css` already and must remain true.
+`static/style.css` (from Phase 1) is **not** discarded — it's kept and layered *after* Pico's stylesheet in `<head>`. Its job now is: (a) override Pico's own `--pico-*` CSS custom properties with AgentClinic-specific values — at minimum the `--pico-primary*` family, for the AgentClinic brand color, in both light and dark mode — and (b) hold the small number of rules the classless build doesn't and shouldn't cover on its own, such as the header's brand+nav flex layout and the agent-detail `<dl>` grid. Mobile-first responsiveness is provided by Pico's classless build; `static/style.css` doesn't need its own `min-width` media query unless an AgentClinic-specific rule requires one.
 
 ## Context
 

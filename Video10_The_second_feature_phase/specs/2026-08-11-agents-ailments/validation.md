@@ -45,7 +45,7 @@ HTTP status `200`. Response body contains the agent's name, model type, and stat
 curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/agents/99999
 ```
 
-Must return `404`. Response body (checked separately) contains a plain "Agent not found" message — no crash, no unhandled exception, no styled error page (that's Phase 7).
+Must return `404`. Response body (checked separately) contains a plain "Agent not found" message — genuinely minimal markup, **not** routed through `<Layout>`: no `<nav>`, no header/footer, no PicoCSS-styled chrome. No crash, no unhandled exception, no styled error page (that's Phase 7).
 
 ### 6. Ailments list page
 
@@ -57,18 +57,18 @@ HTTP status `200`. Response body is HTML containing the name and description of 
 
 ### 7. Navigation is present
 
-The rendered HTML of every page (`/`, `/agents`, `/agents/:id`, `/ailments`) includes a `<nav>` with links to Home, Agents, and Ailments.
+The rendered HTML of every real page (`/`, `/agents`, `/agents/:id` for a valid id, `/ailments`) includes a `<nav>` with links to Home, Agents, and Ailments. (The `/agents/:id` unknown-id response is exempt — see #5.)
 
-### 8. PicoCSS is integrated and responsive CSS still holds
+### 8. PicoCSS (classless build) is integrated and responsive CSS still holds
 
-`static/pico.min.css` exists (vendored from `@picocss/pico`, not a CDN link) and is served successfully:
+`static/pico.min.css` exists — vendored from `@picocss/pico/css/pico.classless.min.css` (the classless build, not the default one), not a CDN link — and is served successfully:
 
 ```
 curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/static/pico.min.css
 curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/static/style.css
 ```
 
-Both must return `200`. `Layout.tsx` must link `pico.min.css` before `style.css`. `static/style.css` must still hold AgentClinic's CSS custom properties plus the nav/list/detail rules Pico doesn't cover, and must still be mobile-first (base styles for small screens, enhanced via `min-width` media queries).
+Both must return `200`. `Layout.tsx` must link `pico.min.css` before `style.css`. `static/style.css` must actually override at least one Pico `--pico-*` custom property (at minimum the `--pico-primary*` family, for the AgentClinic brand color) rather than only defining its own unrelated tokens, plus hold the nav/list/detail rules Pico doesn't cover. Mobile-first responsiveness (base styles for small screens, `min-width` breakpoints for larger ones) must hold for the page as rendered — provided by Pico's classless build; `static/style.css` is not required to duplicate a `min-width` query of its own.
 
 ### 9. Hono and Pico versions stay pinned
 

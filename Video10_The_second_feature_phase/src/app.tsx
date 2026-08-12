@@ -3,6 +3,7 @@ import { serveStatic } from "@hono/node-server/serve-static";
 import { Home } from "./pages/Home";
 import { Agents } from "./pages/Agents";
 import { AgentDetail } from "./pages/AgentDetail";
+import { AgentNotFound } from "./pages/AgentNotFound";
 import { Ailments } from "./pages/Ailments";
 import { listAgents, getAgentById } from "./db/agents";
 import { listAilments, getAilmentsForAgent } from "./db/ailments";
@@ -24,7 +25,7 @@ app.get("/agents/:id", (c) => {
   const agent = Number.isInteger(id) ? getAgentById(id) : undefined;
 
   if (!agent) {
-    return c.html(<AgentDetail agent={undefined} />, 404);
+    return c.html(<AgentNotFound />, 404);
   }
 
   return c.html(<AgentDetail agent={agent} ailments={getAilmentsForAgent(agent.id)} />);

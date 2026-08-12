@@ -1,9 +1,12 @@
 /*
- * AgentClinic-specific layer, loaded after pico.min.css.
- * Pico supplies the reset, typography, and base element styling (including
- * a bare-bones nav/header/footer look); everything here is either an
- * AgentClinic-specific token or a rule Pico's classless-free build doesn't
- * cover on its own (page-width constraint, nav layout, detail-page grid).
+ * AgentClinic-specific layer, loaded after pico.min.css (which is Pico's
+ * *classless* build — vendored from @picocss/pico/css/pico.classless.min.css
+ * — chosen because this project uses plain semantic HTML with no extra
+ * classes; the classless build already constrains body > header/main/footer
+ * to a readable, mobile-first width with no .container wrapper needed).
+ *
+ * Everything below is either an AgentClinic-specific token/override or a
+ * rule Pico doesn't (and shouldn't) know how to make on its own.
  */
 
 :root {
@@ -12,44 +15,43 @@
   --space-md: 1rem;
   --space-lg: 1.5rem;
   --space-xl: 2rem;
-  --max-width: 60rem;
+
+  /* AgentClinic brand: a calm clinical teal, overriding Pico's default blue */
+  --pico-primary: #0d9488;
+  --pico-primary-background: #0d9488;
+  --pico-primary-border: var(--pico-primary-background);
+  --pico-primary-underline: rgba(13, 148, 136, 0.5);
+  --pico-primary-hover: #0f766e;
+  --pico-primary-hover-background: #0f766e;
+  --pico-primary-hover-border: var(--pico-primary-hover-background);
+  --pico-primary-hover-underline: var(--pico-primary-hover);
+  --pico-primary-focus: rgba(45, 212, 191, 0.5);
+  --pico-primary-inverse: #fff;
 }
 
-/* Pico's default (non-classless) build only constrains width inside
-   .container — we're using plain semantic HTML with no extra classes,
-   so recreate that constraint directly on the layout landmarks. */
-body > header,
-body > main,
-body > footer {
-  width: 100%;
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: var(--space-md);
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --pico-primary: #2dd4bf;
+    --pico-primary-background: #0f766e;
+    --pico-primary-border: var(--pico-primary-background);
+    --pico-primary-underline: rgba(45, 212, 191, 0.5);
+    --pico-primary-hover: #5eead4;
+    --pico-primary-hover-background: #14b8a6;
+    --pico-primary-hover-border: var(--pico-primary-hover-background);
+    --pico-primary-hover-underline: var(--pico-primary-hover);
+    --pico-primary-focus: rgba(45, 212, 191, 0.375);
+    --pico-primary-inverse: #fff;
+  }
 }
 
+/* Site header: brand + nav side by side — Pico's classless build doesn't
+   assume a header contains both, so this layout is ours to define. */
 body > header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-sm);
-  padding-block: var(--space-sm);
-}
-
-body > header nav ul {
-  display: flex;
-  gap: var(--space-md);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-body > main {
-  padding-block: var(--space-md);
-}
-
-body > footer {
-  padding-block: var(--space-sm);
 }
 
 /* Agent detail page: label/value pairs for model type, status, etc. */
@@ -65,13 +67,4 @@ main dt {
 
 main dd {
   margin: 0;
-}
-
-/* Tablet and up */
-@media (min-width: 640px) {
-  body > header,
-  body > main,
-  body > footer {
-    padding-inline: var(--space-xl);
-  }
 }
