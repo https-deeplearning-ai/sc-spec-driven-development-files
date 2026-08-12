@@ -34,4 +34,4 @@ This is the first visible page a developer sees when they clone and run the proj
 ## Stakeholder Notes
 
 - **Mary** needs TypeScript end-to-end (satisfied by `strict: true` + successful `tsc --noEmit`)
-- **Steve** wants a site that "works well with a modern browser" — the layout and CSS built in this phase are the foundation every later page inherits, so responsive behavior starts here rather than being bolted on in the Phase 9 polish pass
+- **Steve** wants a site that "works well with a modern browser" — the layout and CSS built in this phase are the foundation every later page inherits, so responsive behavior starts here rather than being bolted on in the Phase 6 polish pass
