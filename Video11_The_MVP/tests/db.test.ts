@@ -48,6 +48,49 @@ describe("migrate", () => {
       .get();
     expect(row).toBeDefined();
   });
+
+  it("creates the therapies table", () => {
+    const db = freshDb();
+    const row = db
+      .prepare(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='therapies'"
+      )
+      .get();
+    expect(row).toBeDefined();
+  });
+
+  it("creates the ailment_therapies join table", () => {
+    const db = freshDb();
+    const row = db
+      .prepare(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='ailment_therapies'"
+      )
+      .get();
+    expect(row).toBeDefined();
+  });
+
+  it("creates the appointments table", () => {
+    const db = freshDb();
+    const row = db
+      .prepare(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='appointments'"
+      )
+      .get();
+    expect(row).toBeDefined();
+  });
+
+  it("rejects an invalid appointment status via the CHECK constraint", () => {
+    const db = freshDb();
+    seed(db);
+    expect(() =>
+      db
+        .prepare(
+          `INSERT INTO appointments (agent_id, therapist_name, scheduled_at, status)
+           VALUES (1, 'Dr. Byte', '2099-01-01T10:00', 'not-a-real-status')`
+        )
+        .run()
+    ).toThrow();
+  });
 });
 
 describe("seed", () => {
@@ -93,5 +136,48 @@ describe("seed", () => {
       }
     ).count;
     expect(second).toBe(first);
+  });
+
+  it("inserts at least 5 therapies", () => {
+    const db = freshDb();
+    seed(db);
+    const { count } = db
+      .prepare("SELECT COUNT(*) as count FROM therapies")
+      .get() as { count: number };
+    expect(count).toBeGreaterThanOrEqual(5);
+  });
+
+  it("links every seeded ailment to at least one therapy", () => {
+    const db = freshDb();
+    seed(db);
+    const { count } = db
+      .prepare(
+        `SELECT COUNT(*) as count FROM ailments a
+         WHERE NOT EXISTS (
+           SELECT 1 FROM ailment_therapies at WHERE at.ailment_id = a.id
+         )`
+      )
+      .get() as { count: number };
+    expect(count).toBe(0);
+  });
+
+  it("is idempotent — seeding twice does not duplicate therapies or links", () => {
+    const db = freshDb();
+    seed(db);
+    const firstTherapies = (
+      db.prepare("SELECT COUNT(*) as count FROM therapies").get() as { count: number }
+    ).count;
+    const firstLinks = (
+      db.prepare("SELECT COUNT(*) as count FROM ailment_therapies").get() as { count: number }
+    ).count;
+    seed(db);
+    const secondTherapies = (
+      db.prepare("SELECT COUNT(*) as count FROM therapies").get() as { count: number }
+    ).count;
+    const secondLinks = (
+      db.prepare("SELECT COUNT(*) as count FROM ailment_therapies").get() as { count: number }
+    ).count;
+    expect(secondTherapies).toBe(firstTherapies);
+    expect(secondLinks).toBe(firstLinks);
   });
 });

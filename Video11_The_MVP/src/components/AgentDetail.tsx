@@ -1,8 +1,8 @@
 import { FC } from "hono/jsx";
 import { Layout } from "./Layout";
-import type { Agent, Ailment } from "../db/types";
+import type { Agent, AilmentWithTherapies } from "../db/types";
 
-type AgentDetailProps = { agent: Agent; ailments: Ailment[] };
+type AgentDetailProps = { agent: Agent; ailments: AilmentWithTherapies[] };
 
 export const AgentDetail: FC<AgentDetailProps> = ({
   agent,
@@ -26,11 +26,25 @@ export const AgentDetail: FC<AgentDetailProps> = ({
             {ailments.map((a) => (
               <li key={a.id}>
                 <strong>{a.name}</strong> — {a.description}
+                {a.therapies.length > 0 && (
+                  <ul>
+                    {a.therapies.map((t) => (
+                      <li key={t.id}>
+                        Recommended: <strong>{t.name}</strong>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
         </>
       )}
+      <p>
+        <a href={`/agents/${agent.id}/book`} role="button">
+          Book Appointment
+        </a>
+      </p>
     </article>
     <p>
       <a href="/agents">← Back to agents</a>
