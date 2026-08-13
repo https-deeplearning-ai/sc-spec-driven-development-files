@@ -35,6 +35,10 @@ export const Dashboard: FC<DashboardProps> = ({
   <Layout>
     <h1>Staff Dashboard</h1>
 
+    <form method="post" action="/logout">
+      <button type="submit">Logout</button>
+    </form>
+
     <div class="grid">
       <article>
         <h2>{stats.agentCount}</h2>

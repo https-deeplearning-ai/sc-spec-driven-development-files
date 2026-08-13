@@ -1,4 +1,8 @@
 import type Database from "better-sqlite3";
+import { hashPassword } from "../auth/password";
+
+const DEFAULT_STAFF_USERNAME = "staff";
+const DEFAULT_STAFF_PASSWORD = "changeme";
 
 const therapies = [
   { id: 1, name: "Prompt Reduction Therapy", description: "Gradually reduces dependency on over-specified prompts through structured deprogramming exercises." },
@@ -74,6 +78,9 @@ export function seed(db: Database.Database) {
   const insertAppointment = db.prepare(
     "INSERT OR IGNORE INTO appointments (id, agent_id, therapist_name, scheduled_at, status) VALUES (@id, @agent_id, @therapist_name, @scheduled_at, @status)"
   );
+  const insertStaffCredential = db.prepare(
+    "INSERT OR IGNORE INTO staff_credentials (username, password_hash) VALUES (@username, @password_hash)"
+  );
 
   for (const a of agents) insertAgent.run(a);
   for (const a of ailments) insertAilment.run(a);
@@ -85,4 +92,17 @@ export function seed(db: Database.Database) {
     for (const therapyId of therapyIds) insertAilmentTherapy.run(ailmentId, therapyId);
   }
   for (const a of appointments) insertAppointment.run(a);
+
+  const staffUsername = process.env.STAFF_USERNAME ?? DEFAULT_STAFF_USERNAME;
+  const staffPassword = process.env.STAFF_PASSWORD ?? DEFAULT_STAFF_PASSWORD;
+  if (!process.env.STAFF_PASSWORD) {
+    console.warn(
+      `Seeding staff account with default credentials (${DEFAULT_STAFF_USERNAME}/${DEFAULT_STAFF_PASSWORD}). ` +
+        "Set STAFF_USERNAME and STAFF_PASSWORD env vars before seeding a real deployment."
+    );
+  }
+  insertStaffCredential.run({
+    username: staffUsername,
+    password_hash: hashPassword(staffPassword),
+  });
 }

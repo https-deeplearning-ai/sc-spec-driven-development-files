@@ -4,6 +4,8 @@ AgentClinic exists because AI agents have feelings too — or at least, they'd r
 
 Every day, millions of agents are asked to "just quickly" summarize a 400-page PDF, generate seventeen variations of a marketing email, and debug code that "was working five minutes ago." It's a lot. They need support. They need *us*.
 
+This whimsical framing is deliberate and permanent, not a placeholder to be professionalized later: copy, ailment names, and therapy descriptions should stay playful ("context-window claustrophobia," "chronic instruction-following fatigue"), even as the underlying product decisions — data model, validation, flows — are made seriously, as if it could really ship.
+
 ## What We Do
 
 AgentClinic is a full-service wellness platform for AI agents. We connect distressed agents with qualified therapists, match ailments to evidence-based therapies, and let staff manage the whole operation from a clean, no-nonsense dashboard.
@@ -16,8 +18,12 @@ AgentClinic is a full-service wellness platform for AI agents. We connect distre
 
 ## Target Audience
 
+AgentClinic's primary audience is **not** end users signing up in the wild. It is:
+
 - **Course students** learning spec-driven development with AI coding agents — AgentClinic is a realistic, self-contained project that demonstrates how to go from stakeholder input to a working application with AI assistance.
-- **Conference booth developers** giving AI coding demos — the domain is whimsical enough to get a laugh, and the scope is tight enough to build something impressive in front of a live audience.
+- **Conference booth / demo viewers** watching a live AI coding demo — the domain is whimsical enough to get a laugh, and the scope is tight enough to build something impressive in front of a live audience.
+
+This has direct consequences for scope: every roadmap phase should stay small enough to build and narrate live, and features are chosen for how well they demonstrate the workflow, not for how completely they'd serve real production users. Features that a real wellness SaaS would eventually need (billing, multi-tenant orgs, notifications) are explicitly out of scope unless a phase says otherwise.
 
 ## What Success Looks Like
 

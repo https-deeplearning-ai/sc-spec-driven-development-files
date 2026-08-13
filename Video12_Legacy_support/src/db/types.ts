@@ -27,3 +27,10 @@ export interface Appointment {
   status: string;
   created_at: string;
 }
+
+export interface StaffCredential {
+  id: number;
+  username: string;
+  password_hash: string;
+  created_at: string;
+}

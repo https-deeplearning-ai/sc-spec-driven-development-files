@@ -13,6 +13,16 @@ beforeAll(() => {
   app = createApp(db);
 });
 
+async function staffCookie(): Promise<string> {
+  const res = await app.request("/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: "username=staff&password=changeme",
+  });
+  const setCookie = res.headers.get("set-cookie") ?? "";
+  return setCookie.split(";")[0];
+}
+
 describe("GET /", () => {
   it("returns 200 OK", async () => {
     const res = await app.request("/");
@@ -209,31 +219,52 @@ describe("Appointment booking", () => {
 });
 
 describe("GET /dashboard", () => {
-  it("returns 200", async () => {
-    const res = await app.request("/dashboard");
+  it("redirects to /login when not authenticated", async () => {
+    const res = await app.request("/dashboard", { redirect: "manual" });
+    expect(res.status).toBe(302);
+    expect(res.headers.get("location")).toBe("/login");
+  });
+
+  it("returns 200 when authenticated", async () => {
+    const cookie = await staffCookie();
+    const res = await app.request("/dashboard", {
+      headers: { Cookie: cookie },
+    });
     expect(res.status).toBe(200);
   });
 
   it("contains agent count", async () => {
-    const res = await app.request("/dashboard");
+    const cookie = await staffCookie();
+    const res = await app.request("/dashboard", {
+      headers: { Cookie: cookie },
+    });
     const html = await res.text();
     expect(html).toContain("Total Agents");
   });
 
   it("contains open appointment count", async () => {
-    const res = await app.request("/dashboard");
+    const cookie = await staffCookie();
+    const res = await app.request("/dashboard", {
+      headers: { Cookie: cookie },
+    });
     const html = await res.text();
     expect(html).toContain("Open Appointments");
   });
 
   it("contains active ailments count", async () => {
-    const res = await app.request("/dashboard");
+    const cookie = await staffCookie();
+    const res = await app.request("/dashboard", {
+      headers: { Cookie: cookie },
+    });
     const html = await res.text();
     expect(html).toContain("Active Ailments In-Flight");
   });
 
   it("lists agents in the management table", async () => {
-    const res = await app.request("/dashboard");
+    const cookie = await staffCookie();
+    const res = await app.request("/dashboard", {
+      headers: { Cookie: cookie },
+    });
     const html = await res.text();
     expect(html).toContain("Bartholomew-47B");
   });

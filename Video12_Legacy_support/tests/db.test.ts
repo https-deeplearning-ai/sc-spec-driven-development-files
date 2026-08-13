@@ -78,6 +78,26 @@ describe("migrate", () => {
       .get();
     expect(row).toBeDefined();
   });
+
+  it("creates the staff_credentials table", () => {
+    const db = freshDb();
+    const row = db
+      .prepare(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='staff_credentials'"
+      )
+      .get();
+    expect(row).toBeDefined();
+  });
+
+  it("creates the sessions table", () => {
+    const db = freshDb();
+    const row = db
+      .prepare(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='sessions'"
+      )
+      .get();
+    expect(row).toBeDefined();
+  });
 });
 
 describe("seed", () => {
@@ -167,5 +187,24 @@ describe("seed", () => {
       }
     ).count;
     expect(second).toBe(first);
+  });
+
+  it("inserts exactly one staff_credentials row", () => {
+    const db = freshDb();
+    seed(db);
+    const { count } = db
+      .prepare("SELECT COUNT(*) as count FROM staff_credentials")
+      .get() as { count: number };
+    expect(count).toBe(1);
+  });
+
+  it("is idempotent for staff_credentials — seeding twice does not duplicate rows", () => {
+    const db = freshDb();
+    seed(db);
+    seed(db);
+    const { count } = db
+      .prepare("SELECT COUNT(*) as count FROM staff_credentials")
+      .get() as { count: number };
+    expect(count).toBe(1);
   });
 });
