@@ -7,6 +7,10 @@ This repository contains the companion code for the DeepLearning.AI Spec-Driven 
 >
 > :computer: **Explore more course artifacts** → [Browse the DeepLearning.AI course artifacts repo](https://github.com/https-deeplearning-ai/deeplearning-ai) to find notebooks, projects, and notes from other courses across the DeepLearning.AI library.
 
+## Practical Spec-Driven Development Tools
+
+- [MySpec](https://myspec.dev) — Interactive spec-driven development platform that guides developers through specification discovery, compiling the 4-file bundle (`constitution.md`, `requirements.md`, `solution.md`, `tasks.md`) with native MCP server integration.
+
 ## How to use this repo
 
 The simplest way to take this course is to start at Video 5 and follow along with each video, building the project as you go.
